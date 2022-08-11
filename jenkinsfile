@@ -10,19 +10,29 @@ pipeline {
         stage ('build the python code'){
         steps { 
             git credentialsId: '11397833-81a7-4ad2-9f8d-be01ca90570f', url: 'https://github.com/saddique164/test-project.git'
-            sh 'pip3 install -r ${WORKSPACE}//fastIP//requirements.txt'
+            sh 'pip3 install -r ${WORKSPACE}//requirements.txt'
         }
         
     }
     stage ("parallel"){
 	parallel {
-	          stage ("run-application"){steps {sh 'python3.8 ${WORKSPACE}//fastIP//app//main.py'}}
-	          stage ("test-application") {steps{sh '''sleep 20
+	          stage ("run-application"){steps {sh 'python3.8 ${WORKSPACE}//app//main.py'}}
+	          stage ("test-application") {steps{sh '''sleep 5
                             curl http://127.0.0.1:8000'''}}
                stage ('kill-the process'){
                     input { message "press ok to move forward" }
                     steps {sh 'kill 9 $(lsof -t -i:8000)'}}}
 }
-   
+    stage ("build and push docker image") {steps{
+         
+        script {
+    
+           docker.withRegistry('https://registry.hub.docker.com', 'e449be1b-5b61-4b33-bc4c-f7d7c0965196') {
+           def customImage = docker.build("saddique164/python-fastapi:v-${env.BUILD_ID}")
+
+        /* Push the container to the custom Registry */
+           customImage.push()
+		}
+}}}
 }
 }
