@@ -1,0 +1,7 @@
+- name: playbook for all tasks
+  hosts: ubuntu-k8s
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+     - kubnertes-cluster     

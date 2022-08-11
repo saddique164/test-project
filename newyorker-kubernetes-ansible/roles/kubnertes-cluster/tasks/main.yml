@@ -1,0 +1,84 @@
+---
+# tasks file for kubnertes-cluster
+- name: "docker key"
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+- name: "Getting kubernetes package key"
+  shell: curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+- name: "Adding docker repo"
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable
+    state: present
+
+- name: "Adding kubernetes repository"
+  apt_repository:
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+
+- name: "update system pakages"
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- name: "Installing docker on the node"
+  package: name=docker-ce state=present
+
+- name: "Enable docker service"
+  shell: systemctl enable docker
+
+- name: "Installing transport-https"
+  apt: pkg=apt-transport-https state=present
+
+- name: "Installing kubernetes"
+  apt: name={{item}}  state=present
+  with_items:
+    - kubelet
+    - kubeadm
+    - kubectl
+    - selinux-utils
+
+- name: " swapoff -a for kubernetes"
+  shell:  swapoff -a
+
+- name: "Reset kubernetes"
+  shell: kubeadm reset --force
+  ignore_errors: True
+  tags:
+    - reset
+- name: "fix container unknow issue"
+  shell: | 
+        rm /etc/containerd/config.toml
+        systemctl restart containerd
+
+- name: "Initializing kubernetes"
+  shell: kubeadm init --pod-network-cidr=10.244.0.0/16
+  tags:
+    - modified
+
+- name: "Configuring kubectl"
+  become: yes
+  become_user: root
+  become_method: sudo
+  shell: | 
+      mkdir -p $HOME/.kube
+      cp /etc/kubernetes/admin.conf $HOME/.kube/config
+      chown $(id -u):$(id -g) $HOME/.kube/config
+  tags:
+    - config-cahnged
+
+- name: "Configuring kubernetes network"
+  become: yes
+  become_user: root
+  become_method: sudo
+  shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+  tags:
+    - network
+
+- name: "Configuring single node cluster"
+  become: yes
+  become_user: root
+  become_method: sudo
+  shell: kubectl taint nodes --all node-role.kubernetes.io/master-
+  tags:
+    - configured
