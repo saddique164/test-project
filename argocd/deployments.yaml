@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-fastapi
+  namespace: newyorker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-fastapi
+  template:
+    metadata:
+      labels:
+        app: python-fastapi
+    spec:
+      containers:
+      - name: python-fastapi
+        image: saddique164/python-fastapi:v1
+        ports:
+        - containerPort: 8000
