@@ -1,1 +1,1 @@
-sed "s/tagVersion/$1/g"  deployments.yaml > deployment-new.yaml
+sed "s/tagVersion/$1/g"  ${WORKSPACE}//deployment-files/deployments.yaml > deployment-new.yaml
