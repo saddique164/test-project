@@ -1,0 +1,12 @@
+
+    Directory: C:\python-coding\test-project\jenkins-installation
+
+[32;1mMode                 LastWriteTime         Length Name[0m
+[32;1m----                 -------------         ------ ----[0m
+-a---           8/12/2022  4:09 PM            108 1.namespace.yaml
+-a---           8/12/2022  4:07 PM            532 2.jenkins-service-account.yaml
+-a---           8/12/2022  4:07 PM            873 3. persistent-volume.yaml
+-a---           8/12/2022  4:07 PM           1442 4.jenkins-deployment.yaml
+-a---           8/12/2022  4:07 PM            337 5.jenkins-service.yaml
+-a---           8/12/2022  4:13 PM              0 jenkins-order.txt
+
