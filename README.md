@@ -45,7 +45,7 @@ I untained master node in order to create a single node cluster because with mas
             iv. 4.jenkins-deployment.yaml
             v.  5.jenkins-service.yaml
 
-Please access the Jenkins on **http://<your-cluster-ip>:32000**.
+Please access the Jenkins on **http://your-cluster-ip:32000**.
   
 ## Task 3:
      CI/CD pipeline for building and creating Image.
