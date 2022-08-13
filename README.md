@@ -10,4 +10,4 @@ I used master node for all the activites and used the same VM to deploy the clus
  
  The Idea of my Continues integration and Continues Delivery is explained in the Picture.
  
- ![Alt text]([relative/path/to/img.jpg](https://github.com/saddique164/test-project/blob/master/cicd.PNG)?raw=true "CICD")
+ ![Alt text](https://github.com/saddique164/test-project/blob/master/cicd.PNG?raw=true "Title")
