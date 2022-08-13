@@ -79,8 +79,13 @@ Please access the Jenkins on **http://your-cluster-ip:32000**.
 
 ## Configuring GitHub with jenkins for webhook
 **Step 1**: go to your GitHub repository and click on ‘Settings’.
+
 **Step 2**: Click on Webhooks and then click on ‘Add webhook’.
+
 **Step 3**: In the ‘Payload URL’ field, paste your Jenkins environment URL. At the end of this URL add /github-webhook/. In the ‘Content type’ select: ‘application/json’ and leave the ‘Secret’ field empty.
+
 **Step 4**: on the page ‘Which events would you like to trigger this webhook?’ choose ‘Let me select individual events.’ Then, check ‘Pull Requests’ and ‘Pushes’. At the end of this option, make sure that the ‘Active’ option is checked and click on ‘Add webhook’.
+
 **Step 5**: in Jenkins, Click on the ‘Source Code Management’ tab after editing your project.
+
 **step 6**:  Click on the ‘Build Triggers’ tab and then on the ‘GitHub hook trigger for GITScm polling’. That's it.
