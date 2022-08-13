@@ -1,4 +1,4 @@
-                                            # Task-Project-NewYorker
+  # Task-Project-NewYorker
   ## Introudction
    The task steps have been fulfilled with the best of my knowledge. My nodes are with following IPS .
    1.	Master 192.168.1.11
@@ -10,8 +10,8 @@ I used master node for all the activites and used the same VM to deploy the clus
  
  ![Alt text](https://github.com/saddique164/test-project/blob/master/cicd.PNG?raw=true "Title")
  
-##TASK 1: 
-###Master Node :
+## TASK 1: 
+### Master Node :
             I installed following tools on Master.
 1.	Docker engine
 2.	Ansible
@@ -32,7 +32,7 @@ Please update the hostname enteries in the **Inventory.txt** file.
 
 I untained master node in order to create a single node cluster because with master node taint we can’t create new resources on it.
 
-##Task 2:  
+## Task 2:  
    ### Installation of Jenkins on kubernetes server
   
   Deploy the Jenkins in kubernetes.
@@ -45,16 +45,16 @@ I untained master node in order to create a single node cluster because with mas
             iv. 4.jenkins-deployment.yaml
             v.  5.jenkins-service.yaml
 
-Please access the Jenkins on **http://<your-cluster-ip>:32000**. 
+Please access the Jenkins on **http://<your-cluster-ip>:32000**.
   
-##Task 3
-    ### CI/CD pipeline for building and creating Image.
+## Task 3:
+     ### CI/CD pipeline for building and creating Image.
   These are the steps followed for ccompletion of Pipeline.
-     
-   ###Step  1:
+  
+  ### Step  1:
     I am checking the connection with the git repo for cloning the code on master node. I have used my credentials ID which I got from Jenkins after setting up my github repo in it.
 
-  ###Sept 2:
+###Sept 2:
     I am installing required dependencies for the python project using pip service.  Thes list of the requirements could been seen in "requirements.txt" file.
 
   ###Step 3:
