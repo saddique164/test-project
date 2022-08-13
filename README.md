@@ -48,33 +48,32 @@ I untained master node in order to create a single node cluster because with mas
 Please access the Jenkins on **http://<your-cluster-ip>:32000**.
   
 ## Task 3:
-     ### CI/CD pipeline for building and creating Image.
+     CI/CD pipeline for building and creating Image.
   These are the steps followed for ccompletion of Pipeline.
   
-  ### Step  1:
+ **Step 1:**
     I am checking the connection with the git repo for cloning the code on master node. I have used my credentials ID which I got from Jenkins after setting up my github repo in it.
 
-###Sept 2:
+**Sept 2:**
     I am installing required dependencies for the python project using pip service.  Thes list of the requirements could been seen in "requirements.txt" file.
 
-  ###Step 3:
+  **Step 3:**
      I am running, testing and killing the application before generating an image for it. All three stages are parallel and I am getting user input to kill the process after checking the output. This will give user the opportunities to stop building the new image if the result is wrong.
    
-   ##Note : Use the extra Virtual Machine as agent with jenkins build as it will be using port 8000 for testing. If you will run it on cluster, it will be occupied by
-            running application in the pod. it will throw connection refused error.
+   **Note** : Use the extra Virtual Machine as agent with jenkins build as it will be using port 8000 for testing. If you will run it on cluster, it will be occupied  by running application in the pod. it will throw connection refused error.
 
-  ###Step 4:
+  **Step 4:**
       I am building the new image from the dockerfile and tagging it with the build number. Same image is being pushed to docker hub repository. You can see Dockerfile in the same github repository. You can check the image and its tags on the following link.
    https://hub.docker.com/repository/docker/saddique164/python-fastapi
   
   **Jenkins plugin** : **cloudbees docker push and build**
   
-  ###step 5:
+  **step 5:**
       I am retagging the application deployments running in the kubernetes cluster. Since my docker hub repository for the app is also public so it will be no issue for you. However, you could change the image name and tags according to your docker hub user in order to use it. 
   
  I am accessing the application on Nodeport 30006. You can modify the service port yourself for your convenience. later you can access your application on any kubernetes node cluster IP using 30006: The format will be <any-node-ip>:30006. In my case it is 192.168.1.11:30006. 
   
-  ##Improvement In the Given task:
+  **Improvement In the Given task:**
       We can use argocd for Continous deployment part. It will help to monitor the cluster state and keep it synch. I can provide the application files for kubernetes on request.
   
   
