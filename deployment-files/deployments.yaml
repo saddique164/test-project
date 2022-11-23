@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: python-fastapi
-        image: saddique164/python-fastapi:v1
+        image: saddique164/python-fastapi:v-9
         ports:
         - containerPort: 8000
